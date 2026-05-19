@@ -1,0 +1,37 @@
+# API Framework
+fastapi[standard]
+
+# LLM - Ollama client
+ollama
+
+# Google Embeddings
+google-generativeai
+
+# RAG - Document processing
+llama-index
+llama-index-vector-stores-qdrant
+pymupdf
+
+# Vector DB
+qdrant-client
+
+# Structured Output
+instructor
+pydantic
+
+# Database
+sqlalchemy[asyncio]
+asyncpg
+alembic
+
+# Cache
+redis[asyncio]
+
+# Auth
+PyJWT
+passlib[bcrypt]
+python-multipart
+
+# Config
+python-dotenv
+pydantic-settings
