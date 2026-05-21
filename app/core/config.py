@@ -10,9 +10,10 @@ class Config(BaseSettings):
     # Qdrant
     QDRANT_URL: str = "http://localhost:6333"
     QDRANT_COLLECTION: str = "medical_docs"
+    VECTOR_SIZE: int = 786
 
     # Google Embeddings
-    GOOGLE_API_KEY: str = ""
+    GEMINI_API_KEY: str = ""
 
     # Ollama
     OLLAMA_URL: str = "http://localhost:11434"

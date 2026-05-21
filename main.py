@@ -2,13 +2,16 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.core.database import database
 from app.core.config import config
 from app.modules.auth.router import router as auth_router
 from app.modules.user.router import router as user_router
+from app.rag.vector_store import vector_store
 
 @asynccontextmanager
 async def life_span(app: FastAPI):
+    await vector_store.ensure_collection_exists()
     yield
     await database.close()
 
