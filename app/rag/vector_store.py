@@ -5,7 +5,8 @@ from qdrant_client.models import (
     PointStruct,
     Filter,
     FieldCondition,
-    MatchValue
+    MatchValue,
+    ScoredPoint,
 )
 
 from app.core.config import config
@@ -36,8 +37,8 @@ class VectorStore:
 
     async def search(
         self, query_vector: list[float], user_id: int, limit: int = 5
-    ) -> list:
-        results = await self.__qdrantClient.search(
+    ) -> list[ScoredPoint]:
+        results: list[ScoredPoint] = await self.__qdrantClient.search(  # type: ignore
             collection_name=config.QDRANT_COLLECTION,
             query_vector=query_vector,
             query_filter=Filter(
@@ -45,7 +46,7 @@ class VectorStore:
             ),
             limit=limit,
         )
-        return results
+        return results  # type: ignore
 
 
 vector_store = VectorStore()

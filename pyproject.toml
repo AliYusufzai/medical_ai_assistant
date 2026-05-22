@@ -24,4 +24,5 @@ dependencies = [
     "qdrant-client>=1.18.0",
     "sqlalchemy[asyncio]>=2.0.49",
     "unstructured[pdf]>=0.22.29",
+    "uuid>=1.30",
 ]

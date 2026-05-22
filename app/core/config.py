@@ -25,6 +25,12 @@ class Config(BaseSettings):
     JWT_ACCESS_EXPIRE_MINUTES: int = 60
     JWT_REFRESH_EXPIRE_DAYS: int = 7
 
+    #Pipeline
+    CHUNK_SIZE: int = 500
+    CHUNK_OVERLAP: int = 50
+
+    UPLOAD_DIR: str = "uploads"
+
     model_config = SettingsConfigDict(env_file=".env")
 
 
