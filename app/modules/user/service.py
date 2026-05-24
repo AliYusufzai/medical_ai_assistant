@@ -10,7 +10,7 @@ class UserService:
     def __init__(self, db: AsyncSession) -> None:
         self.__db = db
 
-    async def get_by_id(self, user_id: str) -> User | None:
+    async def get_by_id(self, user_id: int) -> User | None:
         result = await self.__db.execute(select(User).where(User.id == user_id))
         return result.scalar_one_or_none()
 

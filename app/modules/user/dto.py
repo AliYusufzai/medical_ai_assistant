@@ -7,7 +7,7 @@ class UserBase(BaseModel):
     email: EmailStr
     
 class UserCreate(UserBase):
-    password: str = Field(..., min_length=8, description="Password must be at least 8 characters long")
+    password: str = Field(..., min_length=6, max_length=100, description="Password must be at least 6 characters long")
 
     @field_validator("password")
     @classmethod
@@ -16,8 +16,6 @@ class UserCreate(UserBase):
             raise ValueError("Password must contain at least one number")
         if not any(char.isupper() for char in value):
             raise ValueError("Password must contain at least one uppercase letter")
-        if not any(char in "!@#$%^&*" for char in value):
-            raise ValueError("Password must contain at least one special character (!@#$%^&*)")
         return value
     
 class UserResponse(UserBase):

@@ -38,8 +38,10 @@ class Pipeline:
         self, file_path: str, user_id: int, document_id: int
     ) -> None:
         text = self.extract_text(file_path)
+        print(f"Extracted text length: {len(text)} characters")
 
         chunks = self.chunk_text(text, config.CHUNK_SIZE, config.CHUNK_OVERLAP)
+        print(f"Total chunks: {len(chunks)}")
 
         coroutines = []
         for chunk in chunks:

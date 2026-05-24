@@ -7,6 +7,7 @@ requires-python = ">=3.14"
 dependencies = [
     "alembic>=1.18.4",
     "asyncpg>=0.31.0",
+    "bcrypt>=5.0.0",
     "fastapi[standard]>=0.136.1",
     "google-genai>=2.5.0",
     "google-generativeai>=0.8.6",
@@ -14,7 +15,7 @@ dependencies = [
     "llama-index>=0.14.22",
     "llama-index-vector-stores-qdrant>=0.10.1",
     "ollama>=0.6.2",
-    "passlib[bcrypt]>=1.7.4",
+    "passlib[bcrypt]==1.7.4",
     "pydantic>=2.13.4",
     "pydantic-settings>=2.14.1",
     "pyjwt>=2.12.1",

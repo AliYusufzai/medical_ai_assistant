@@ -2,19 +2,22 @@ from datetime import datetime, timedelta, timezone
 from typing import Any
 import jwt
 from jwt.exceptions import InvalidTokenError
-from passlib.context import CryptContext
+import bcrypt
 from app.core.config import config
 
 
 class PasswordManager:
-    def __init__(self) -> None:
-        self.__pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
     def hash(self, password: str) -> str:
-        return self.__pwd_context.hash(password)
+        return bcrypt.hashpw(
+            password.encode("utf-8"),
+            bcrypt.gensalt()
+        ).decode("utf-8")
 
     def verify(self, plain: str, hashed: str) -> bool:
-        return self.__pwd_context.verify(plain, hashed)
+        return bcrypt.checkpw(
+            plain.encode("utf-8"),
+            hashed.encode("utf-8")
+        )
 
 
 class JWTManager:

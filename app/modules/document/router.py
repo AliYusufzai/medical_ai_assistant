@@ -18,6 +18,7 @@ async def upload(
     current_user: User = Depends(get_current_user),
 ):
     service = DocumentService(db)
+    print(f"Uploading document for user_id: {current_user}")
     document = await service.upload(file, current_user.id)
     background_tasks.add_task(
         pipeline.index_document,

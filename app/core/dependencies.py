@@ -1,6 +1,6 @@
 from typing import AsyncGenerator
 from fastapi import Depends
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,7 +8,8 @@ from app.core.database import database
 from app.core.security import jwt_manager
 from app.core.exceptions import AuthException
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+bearer_scheme = HTTPBearer()
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
@@ -23,8 +24,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 
 async def get_current_user(
-    token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
+    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme), db: AsyncSession = Depends(get_db)
 ):
+    token = credentials.credentials
     try:
         payload = jwt_manager.decode_token(token)
     except InvalidTokenError:
@@ -41,9 +43,9 @@ async def get_current_user(
     from app.modules.user.service import UserService
 
     user_service = UserService(db)
-    user = await user_service.get_by_id(str(user_id))
+    user = await user_service.get_by_id(int(user_id))
 
     if not user or not user.is_active:
         raise AuthException.INVALID_CREDENTIALS
 
-    return user_id
+    return user
