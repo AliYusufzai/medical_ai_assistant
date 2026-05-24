@@ -68,3 +68,7 @@ class ChatException:
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         detail="Failed to generate response",
     )
+    NOT_FOUND = HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Conversation not found",
+    )

@@ -38,15 +38,15 @@ class VectorStore:
     async def search(
         self, query_vector: list[float], user_id: int, limit: int = 5
     ) -> list[ScoredPoint]:
-        results: list[ScoredPoint] = await self.__qdrantClient.search(  # type: ignore
+        results: list[ScoredPoint] = await self.__qdrantClient.query_points(  # type: ignore
             collection_name=config.QDRANT_COLLECTION,
-            query_vector=query_vector,
+            query=query_vector,
             query_filter=Filter(
                 must=[FieldCondition(key="user_id", match=MatchValue(value=user_id))]
             ),
             limit=limit,
         )
-        return results  # type: ignore
+        return results.points  # type: ignore
 
 
 vector_store = VectorStore()

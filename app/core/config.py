@@ -17,7 +17,7 @@ class Config(BaseSettings):
 
     # Ollama
     OLLAMA_URL: str = "http://localhost:11434"
-    OLLAMA_MODEL: str = "llama3.2:3b"
+    OLLAMA_MODEL: str = ""
 
     # JWT
     JWT_SECRET_KEY: str = ""

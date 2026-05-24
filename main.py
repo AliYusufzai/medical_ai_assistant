@@ -8,6 +8,7 @@ from app.core.config import config
 from app.modules.auth.router import router as auth_router
 from app.modules.user.router import router as user_router
 from app.modules.document.router import router as document_router
+from app.modules.chat.router import router as chat_router
 from app.rag.vector_store import vector_store
 
 @asynccontextmanager
@@ -28,6 +29,7 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(user_router, prefix="/users", tags=["Users"])
 app.include_router(document_router, prefix="/documents", tags=["Documents"])
+app.include_router(chat_router, prefix="/chat", tags=["Chat"])
 
 @app.get("/")
 def root():
